@@ -79,6 +79,11 @@ app.use(
 );
 
 app.use(express.static(PUBLIC_DIR));
+
+// Ana sayfa yönlendirmesi
+app.get("/", (req, res) => {
+  res.redirect("/html/anasayfa.html");
+});
 /** =======================
  *  UPLOAD (Görsel Yükleme)
  *  ======================= */
