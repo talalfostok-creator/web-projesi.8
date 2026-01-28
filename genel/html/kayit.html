@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kayıt Ol | Turizm Rehberi</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#060A12;
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#49D6C5;
+      --accent2:#7AA7FF;
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --r: 22px;
+    }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 420px at 15% 15%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 420px at 85% 20%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 95%, rgba(230,197,122,.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height:100vh;
+    }
+
+    /* Navbar */
+    .navx{
+      max-width: 1180px;
+      margin: 14px auto 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      background: rgba(10,12,18,.55);
+      border:1px solid var(--stroke);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--text);
+      font-weight:900; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(135deg, rgba(73,214,197,.9), rgba(122,167,255,.75));
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition:.2s ease;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .navlinks a:hover{ color:#fff; background: rgba(255,255,255,.08); }
+
+    /* Layout */
+    .wrap{
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .panel{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    /* Left visual */
+    .hero{
+      min-height: 560px;
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(6,10,18,.10) 0%, rgba(6,10,18,.92) 85%),
+        url("https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position:center;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 260px at 20% 30%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 260px at 85% 30%, rgba(122,167,255,.16), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:absolute; inset:0;
+      padding: 20px;
+      display:flex; flex-direction:column; justify-content:flex-end;
+      gap: 10px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.78);
+      font-weight:800;
+      font-size:.92rem;
+      width: fit-content;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(73,214,197,.16);
+    }
+    h1{
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      letter-spacing: .3px;
+      font-size: clamp(2.0rem, 3.2vw, 2.8rem);
+      line-height: 1.05;
+      margin: 0;
+    }
+    .sub{
+      color: rgba(255,255,255,.74);
+      margin:0;
+      max-width: 70ch;
+      line-height: 1.65;
+      font-size: 1.02rem;
+    }
+    .chips{
+      display:flex; gap: 10px; flex-wrap:wrap; margin-top:6px;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.78);
+      font-weight: 800;
+      font-size: .93rem;
+      user-select:none;
+    }
+
+    /* Right form */
+    .formbox{ padding: 18px; }
+    .formhead{
+      padding: 18px 18px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .formhead b{ font-size: 1.08rem; letter-spacing:.2px; }
+    .formhead span{ color: var(--muted); font-size: .92rem; display:block; margin-top:4px; }
+
+    .control{
+      background: rgba(255,255,255,.06) !important;
+      border: 1px solid rgba(255,255,255,.14) !important;
+      color: #fff !important;
+      border-radius: 14px !important;
+      padding: 12px 12px !important;
+    }
+    .control::placeholder{ color: rgba(255,255,255,.55); }
+    .btn-primary2{
+      border: 1px solid rgba(73,214,197,.35);
+      background: linear-gradient(135deg, rgba(73,214,197,.95), rgba(122,167,255,.85));
+      color: #041018;
+      font-weight: 900;
+      border-radius: 14px;
+      padding: 12px 14px;
+      width:100%;
+    }
+    .btn-primary2:hover{ filter: brightness(1.05); }
+    .btn-soft{
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:800;
+      border-radius: 14px;
+      padding: 12px 14px;
+      width:100%;
+    }
+    .mini{
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.55;
+    }
+    .link{
+      color: rgba(255,255,255,.82);
+      text-decoration:none;
+      font-weight: 800;
+    }
+    .link:hover{ color:#fff; text-decoration: underline; }
+
+    .alertx{
+      display:none;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.85);
+    }
+
+    @media (max-width: 992px){
+      .grid{ grid-template-columns: 1fr; }
+      .hero{ min-height: 320px; }
+      .navlinks{ display:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="navx d-flex align-items-center justify-content-between">
+    <a class="brand" href="anasayfa.html">
+      <span class="logo">⛵</span>
+      <span>Turizm Rehberi</span>
+    </a>
+
+    <div class="navlinks d-flex align-items-center">
+      <a href="anasayfa.html">Ana Sayfa</a>
+      <a href="turistik-yerler.html">Turistik Yerler</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html">İletişim</a>
+    </div>
+
+    <a class="link" href="giris.html">Giriş</a>
+  </div>
+
+  <div class="wrap">
+    <div class="grid">
+      <!-- LEFT -->
+      <section class="panel hero">
+        <div class="hero-inner">
+          <div class="kicker"><span class="dot"></span> Yeni hesap • Hızlı kayıt • Seyahat planı</div>
+          <h1>Hesabını Oluştur</h1>
+          <p class="sub">
+            Favori rotalarını kaydet, gezilecek yerleri takip et ve turizm deneyimini kişiselleştir.
+          </p>
+          <div class="chips">
+            <div class="chip">🌊 Sahil Rotaları</div>
+            <div class="chip">📸 Fotoğraf Noktaları</div>
+            <div class="chip">🏛️ Kültür & Tarih</div>
+            <div class="chip">🍽️ Lezzet Durakları</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT -->
+      <section class="panel">
+        <div class="formhead">
+          <b>Kayıt Ol</b>
+          <span>Bilgilerini doldur ve hesabını oluştur.</span>
+        </div>
+
+        <div class="formbox">
+          <form id="registerForm" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Ad Soyad</label>
+                <input id="name" class="form-control control" placeholder="Örn: Talal Fostok" required minlength="3">
+                <div class="invalid-feedback">Ad Soyad en az 3 karakter olmalı.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Telefon (opsiyonel)</label>
+                <input id="phone" class="form-control control" placeholder="05xx xxx xx xx">
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-semibold">E-posta</label>
+                <input id="email" type="email" class="form-control control" placeholder="ornek@mail.com" required>
+                <div class="invalid-feedback">Lütfen geçerli bir e-posta gir.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Şifre</label>
+                <div class="input-group">
+                  <input id="password" type="password" class="form-control control" placeholder="••••••••" required minlength="4">
+                  <button class="btn btn-soft" type="button" id="togglePass" style="width:auto;">Göster</button>
+                  <div class="invalid-feedback">Şifre en az 4 karakter olmalı.</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Şifre Tekrar</label>
+                <input id="password2" type="password" class="form-control control" placeholder="••••••••" required minlength="4">
+                <div class="invalid-feedback">Şifreler aynı olmalı.</div>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label fw-semibold">Kısa Tanıtım (opsiyonel)</label>
+                <textarea id="bio" class="form-control control" rows="3" placeholder="Seyahat ilgi alanların (kültür, doğa, lezzet...)"></textarea>
+              </div>
+
+              <div class="col-12">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="terms" required>
+                  <label class="form-check-label mini" for="terms">
+                    Kullanım koşullarını kabul ediyorum.
+                  </label>
+                  <div class="invalid-feedback">Devam etmek için kabul etmelisin.</div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <button class="btn-primary2" type="submit">Kayıt Ol</button>
+                <div id="alertBox" class="alertx"></div>
+              </div>
+
+              <div class="col-12">
+                <p class="mini mb-0">
+                  Zaten hesabın var mı? <a class="link" href="giris.html">Giriş Yap</a>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <p class="mini mt-3 text-center">
+      © <span id="yil"></span> Turizm Rehberi • Web Tasarım Projesi
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("yil").textContent = new Date().getFullYear();
+
+    const form = document.getElementById("registerForm");
+    const alertBox = document.getElementById("alertBox");
+
+    function showAlert(text, ok=true){
+      alertBox.style.display = "block";
+      alertBox.style.borderColor = ok ? "rgba(73,214,197,.35)" : "rgba(255,110,110,.45)";
+      alertBox.style.color = ok ? "#fff" : "#ffdede";
+      alertBox.textContent = text;
+    }
+
+    // Şifre göster/gizle
+    const pass = document.getElementById("password");
+    document.getElementById("togglePass").addEventListener("click", () => {
+      const isPass = pass.type === "password";
+      pass.type = isPass ? "text" : "password";
+      togglePass.textContent = isPass ? "Gizle" : "Göster";
+    });
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      // basic validate
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        showAlert("Lütfen alanları doğru doldur.", false);
+        return;
+      }
+
+      const p1 = document.getElementById("password").value.trim();
+      const p2 = document.getElementById("password2").value.trim();
+      if (p1 !== p2) {
+        form.classList.add("was-validated");
+        showAlert("Şifreler aynı olmalı.", false);
+        return;
+      }
+
+      const payload = {
+        name: document.getElementById("name").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        password: p1,
+        bio: document.getElementById("bio").value.trim()
+      };
+
+      try{
+        // Eğer sunucunda /api/register varsa gerçek kayıt
+        const r = await fetch("/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const j = await r.json().catch(()=>({ ok:false, error:"Sunucu yanıtı okunamadı" }));
+        if (!r.ok || !j.ok) throw new Error(j.error || "Kayıt başarısız.");
+
+        showAlert("✅ Kayıt başarılı! Giriş sayfasına yönlendiriliyorsun...");
+        setTimeout(() => window.location.href = "giris.html", 700);
+
+      }catch(err){
+        // Projende /api/register yoksa: en azından kullanıcıya temiz mesaj ver
+        showAlert("❌ " + err.message + " (Not: /api/register endpoint'i yoksa sunucuya eklenmeli)", false);
+      }
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

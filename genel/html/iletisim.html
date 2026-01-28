@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>İletişim | Turizm Rehberi</title>
+
+  <style>
+    :root{
+      --bg:#070B14;
+      --card: rgba(255,255,255,.05);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#49D6C5;
+      --accent2:#7AA7FF;
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --r: 20px;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background:
+        radial-gradient(900px 420px at 15% 15%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 420px at 85% 20%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 95%, rgba(230,197,122,.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height:100vh;
+    }
+
+    /* NAV */
+    .navx{
+      max-width: 1180px;
+      margin: 14px auto 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      background: rgba(10,12,18,.55);
+      border:1px solid var(--stroke);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--text);
+      font-weight:900;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(135deg, rgba(73,214,197,.9), rgba(122,167,255,.75));
+      display:grid; place-items:center;
+    }
+    .navlinks{
+      display:flex; align-items:center; gap:8px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition:.2s ease;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .navlinks a:hover{ color:#fff; background: rgba(255,255,255,.08); }
+    .navlinks a.active{ color:#fff; background: rgba(255,255,255,.08); }
+    .navright{
+      display:flex; align-items:center; gap:10px;
+    }
+    .btn-pill{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:800;
+      border-radius: 999px;
+      padding: 10px 14px;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .btn-pill.primary{
+      border-color: rgba(73,214,197,.40);
+      background: linear-gradient(135deg, rgba(73,214,197,.22), rgba(122,167,255,.14));
+    }
+    .btn-pill:hover{ background: rgba(255,255,255,.10); }
+
+    .wrap{ max-width:1180px; margin:0 auto; padding:18px; }
+
+    /* Header text */
+    .topline{
+      color: rgba(255,255,255,.78);
+      margin: 10px 0 12px;
+      text-align:center;
+      font-weight:600;
+    }
+
+    /* Layout */
+    .grid{
+      display:grid;
+      grid-template-columns: 1.25fr .9fr;
+      gap: 14px;
+    }
+    .glass{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: var(--card);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .glass::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background:
+        radial-gradient(500px 220px at 15% 15%, rgba(73,214,197,.10), transparent 60%),
+        radial-gradient(500px 220px at 85% 20%, rgba(122,167,255,.10), transparent 60%);
+      pointer-events:none;
+    }
+    .panel{
+      position:relative;
+      padding: 16px;
+    }
+    h2{
+      margin:0;
+      font-size:1.15rem;
+      font-weight:900;
+    }
+    .muted{ color: var(--muted); }
+
+    /* Form */
+    form{ margin-top: 12px; }
+    .row2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .row1{ display:grid; grid-template-columns: 1fr; gap: 12px; }
+    label{
+      display:block;
+      font-weight:800;
+      font-size:.92rem;
+      color: rgba(255,255,255,.86);
+      margin-bottom: 6px;
+    }
+    .control{
+      width:100%;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      padding: 12px 12px;
+      outline:none;
+      transition: .15s ease;
+    }
+    .control::placeholder{ color: rgba(255,255,255,.55); }
+    .control:focus{
+      border-color: rgba(73,214,197,.55);
+      box-shadow: 0 0 0 4px rgba(73,214,197,.14);
+    }
+
+    textarea.control{ min-height: 120px; resize: vertical; }
+
+    /* Custom validation messages (no browser tooltip) */
+    .err{
+      display:none;
+      margin-top: 6px;
+      font-size: .88rem;
+      color: #ffb4b4;
+      font-weight: 700;
+    }
+    .field.invalid .control{
+      border-color: rgba(255,120,120,.70);
+      box-shadow: 0 0 0 4px rgba(255,120,120,.12);
+    }
+    .field.invalid .err{ display:block; }
+
+    /* Buttons */
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+      align-items:center;
+    }
+    .btnx{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:900;
+      border-radius: 14px;
+      padding: 11px 14px;
+      cursor:pointer;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .btnx.primary{
+      border-color: rgba(73,214,197,.40);
+      background: linear-gradient(135deg, rgba(73,214,197,.22), rgba(122,167,255,.14));
+    }
+    .btnx:hover{ background: rgba(255,255,255,.10); }
+
+    .note{
+      margin-top: 10px;
+      color: rgba(255,255,255,.70);
+      font-size: .92rem;
+    }
+
+    /* Right side */
+    .side-stack{ display:grid; gap: 12px; }
+    .info-item{
+      display:flex; gap: 12px; align-items:center;
+      padding: 14px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .ico{
+      width:42px; height:42px; border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 55%),
+        linear-gradient(135deg, rgba(73,214,197,.20), rgba(122,167,255,.16));
+      display:grid; place-items:center;
+      font-size: 18px;
+      flex: 0 0 auto;
+    }
+    .info-title{ font-weight: 900; margin:0; }
+    .info-text{ margin:2px 0 0; color: rgba(255,255,255,.70); }
+
+    .mapbox{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      background: rgba(255,255,255,.04);
+    }
+    .mapimg{
+      width:100%;
+      height: 210px;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .mapcap{
+      padding: 12px 14px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.6;
+      font-size: .95rem;
+    }
+
+    footer{
+      max-width:1180px;
+      margin: 14px auto 0;
+      padding: 18px;
+      color: rgba(255,255,255,.68);
+      text-align:center;
+      font-weight:700;
+    }
+
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .navlinks{ display:none; }
+    }
+    @media (max-width: 560px){
+      .row2{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="navx">
+    <a class="brand" href="anasayfa.html">
+      <span class="logo">⛵</span>
+      <span>Turizm Rehberi</span>
+    </a>
+
+    <div class="navlinks">
+      <a href="anasayfa.html">Ana Sayfa</a>
+      <a href="turistik-yerler.html">Turistik Yerler</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a class="active" href="iletisim.html">İletişim</a>
+    </div>
+
+    <div class="navright">
+      <a class="btn-pill" href="giris.html">Giriş</a>
+      <a class="btn-pill primary" href="turistik-yerler.html">Keşfet →</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="topline">Soruların mı var? Rota önerisi veya iş birliği için bize mesaj gönderebilirsin.</div>
+
+    <div class="grid">
+      <!-- LEFT: FORM -->
+      <section class="glass">
+        <div class="panel">
+          <h2>Mesaj Gönder</h2>
+          <div class="muted">Kısa ve net bilgi bırak, en kısa sürede dönüş yapalım.</div>
+
+          <!-- novalidate: browser tooltip çıkmasın -->
+          <form id="contactForm" novalidate>
+            <div class="row2">
+              <div class="field" data-name="name">
+                <label for="name">Ad Soyad</label>
+                <input id="name" class="control" type="text" placeholder="Örn: Talal Fostok" required>
+                <div class="err">Lütfen ad soyad gir.</div>
+              </div>
+
+              <div class="field" data-name="email">
+                <label for="email">E-posta</label>
+                <input id="email" class="control" type="email" placeholder="ornek@mail.com" required>
+                <div class="err">Lütfen geçerli bir e-posta gir.</div>
+              </div>
+            </div>
+
+            <div class="row2">
+              <div class="field" data-name="topic">
+                <label for="topic">Konu</label>
+                <select id="topic" class="control" required>
+                  <option value="" selected>Seçiniz</option>
+                  <option value="Rota Önerisi">Rota Önerisi</option>
+                  <option value="İş Birliği">İş Birliği</option>
+                  <option value="Genel Soru">Genel Soru</option>
+                  <option value="Geri Bildirim">Geri Bildirim</option>
+                </select>
+                <div class="err">Lütfen konu seç.</div>
+              </div>
+
+              <div class="field" data-name="city">
+                <label for="city">Şehir</label>
+                <input id="city" class="control" type="text" placeholder="Örn: İstanbul" required>
+                <div class="err">Lütfen şehir gir.</div>
+              </div>
+            </div>
+
+            <div class="row1">
+              <div class="field" data-name="message">
+                <label for="message">Mesaj</label>
+                <textarea id="message" class="control" placeholder="Mesajınızı yazın..." required></textarea>
+                <div class="err">Lütfen mesajını yaz.</div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="btnx primary" type="submit">Gönder</button>
+              <a class="btnx" href="turistik-yerler.html">Turistik Yerler</a>
+              <a class="btnx" href="anasayfa.html">Ana Sayfa</a>
+            </div>
+
+            <div class="note">
+              Not: Bu form tasarım amaçlıdır. (Ders gereksinimlerine uygun şekilde HTML/CSS ile hazırlanmıştır.)
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- RIGHT: INFO -->
+      <aside class="glass">
+        <div class="panel side-stack">
+          <div class="info-item">
+            <div class="ico">📍</div>
+            <div>
+              <div class="info-title">Adres</div>
+              <div class="info-text">İstanbul, Türkiye (Demo)</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="ico">📞</div>
+            <div>
+              <div class="info-title">Telefon</div>
+              <div class="info-text">+90 (000) 000 00 00 (Demo)</div>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="ico">✉️</div>
+            <div>
+              <div class="info-title">E-posta</div>
+              <div class="info-text">info@turizmrehberi.com (Demo)</div>
+            </div>
+          </div>
+
+          <div class="mapbox">
+            <img class="mapimg" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80" alt="Harita">
+            <div class="mapcap">
+              Harita / Konum (Görsel) <br>
+              İstersen buraya gerçek Google Maps iframe de ekleyebilirsin.
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <footer>© 2026 Turizm Rehberi • Web Tasarım Projesi</footer>
+
+  <script>
+    // Custom validation: tooltip yerine sayfa içinde hata gösterir
+    const form = document.getElementById("contactForm");
+    const fields = {
+      name: document.getElementById("name"),
+      email: document.getElementById("email"),
+      topic: document.getElementById("topic"),
+      city: document.getElementById("city"),
+      message: document.getElementById("message"),
+    };
+
+    function setInvalid(key, invalid){
+      const box = fields[key].closest(".field");
+      box.classList.toggle("invalid", invalid);
+    }
+
+    function isEmailValid(v){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    function validate(){
+      const name = fields.name.value.trim();
+      const email = fields.email.value.trim();
+      const topic = fields.topic.value.trim();
+      const city = fields.city.value.trim();
+      const message = fields.message.value.trim();
+
+      setInvalid("name", name.length < 2);
+      setInvalid("email", !isEmailValid(email));
+      setInvalid("topic", topic === "");
+      setInvalid("city", city.length < 2);
+      setInvalid("message", message.length < 5);
+
+      const ok =
+        name.length >= 2 &&
+        isEmailValid(email) &&
+        topic !== "" &&
+        city.length >= 2 &&
+        message.length >= 5;
+
+      return ok;
+    }
+
+    // Input change -> anlık düzelt
+    Object.keys(fields).forEach(k => {
+      fields[k].addEventListener("input", () => validate());
+      fields[k].addEventListener("change", () => validate());
+    });
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if(!validate()) return;
+
+  const payload = {
+    name: document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    topic: document.getElementById("topic").value.trim(),
+    city: document.getElementById("city").value.trim(),
+    message: document.getElementById("message").value.trim(),
+  };
+
+  const r = await fetch("/api/contact", {
+    method: "POST",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(payload)
+  });
+  const j = await r.json();
+
+  if(!j.ok){
+    alert("Gönderilemedi: " + (j.error || ""));
+    return;
+  }
+
+  alert("Mesajınız alındı ✅ (Admin panelde görünecek)");
+  form.reset();
+});
+
+  </script>
+</body>
+</html>

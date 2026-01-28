@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Turistik Yerler | Turizm Rehberi</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap (CSS) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#060A12;
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#49D6C5;
+      --accent2:#7AA7FF;
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --r: 22px;
+    }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 420px at 15% 15%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 420px at 85% 20%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 95%, rgba(230,197,122,.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height:100vh;
+    }
+
+    /* NAV */
+    .navx{
+      max-width: 1180px;
+      margin: 14px auto 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      background: rgba(10,12,18,.55);
+      border:1px solid var(--stroke);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--text);
+      font-weight:900; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(135deg, rgba(73,214,197,.9), rgba(122,167,255,.75));
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition:.2s ease;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .navlinks a:hover{ color:#fff; background: rgba(255,255,255,.08); }
+    .link{
+      color: rgba(255,255,255,.82);
+      text-decoration:none;
+      font-weight: 800;
+    }
+    .link:hover{ color:#fff; text-decoration: underline; }
+
+    .wrap{ max-width:1180px; margin:0 auto; padding:18px; }
+
+    /* HERO */
+    .hero{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(180deg, rgba(6,10,18,.15) 0%, rgba(6,10,18,.92) 88%),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2000&q=80");
+      background-size: cover;
+      background-position:center;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      padding: 22px;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 280px at 20% 25%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 280px at 85% 20%, rgba(122,167,255,.16), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{ position:relative; }
+    h1{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.3px;
+      margin:0;
+      font-size: clamp(2.1rem, 3.1vw, 2.9rem);
+      line-height:1.05;
+    }
+    .sub{ color: rgba(255,255,255,.78); margin:10px 0 0; max-width: 75ch; line-height:1.65; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.78);
+      font-weight:800;
+      font-size:.92rem;
+      width: fit-content;
+      margin-bottom: 10px;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(73,214,197,.16);
+    }
+
+    /* FILTER BAR */
+    .glass{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.78);
+      font-weight: 800;
+      font-size: .93rem;
+      cursor:pointer;
+      user-select:none;
+      transition:.18s ease;
+      white-space:nowrap;
+    }
+    .chip:hover{ background: rgba(255,255,255,.10); color:#fff; }
+    .chip.active{
+      border-color: rgba(73,214,197,.45);
+      background: linear-gradient(135deg, rgba(73,214,197,.18), rgba(122,167,255,.12));
+      color:#fff;
+    }
+    .control{
+      background: rgba(255,255,255,.06) !important;
+      border: 1px solid rgba(255,255,255,.14) !important;
+      color: #fff !important;
+      border-radius: 14px !important;
+      padding: 12px 12px !important;
+    }
+    .control::placeholder{ color: rgba(255,255,255,.55); }
+
+    /* CARDS */
+    .cardx{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      height: 100%;
+    }
+    .thumb{
+      height: 210px;
+      width: 100%;
+      object-fit: cover;
+      display:block;
+    }
+    .badge-soft{
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.85);
+      font-weight: 800;
+    }
+    .muted{ color: var(--muted); }
+    .btn-soft{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:800;
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    .btn-soft:hover{ background: rgba(255,255,255,.10); }
+
+    /* MODAL */
+    .modal-content{
+      background:#0b1020;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 18px;
+      overflow:hidden;
+    }
+    .modal-header{
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .modal-footer{
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .detail-hero{
+      height: 220px;
+      width:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .info-box{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    footer{ color: rgba(255,255,255,.70); }
+
+    @media (max-width: 992px){
+      .navlinks{ display:none !important; }
+      .thumb{ height: 200px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="navx d-flex align-items-center justify-content-between">
+    <a class="brand" href="anasayfa.html">
+      <span class="logo">⛵</span>
+      <span>Turizm Rehberi</span>
+    </a>
+
+    <div class="navlinks d-flex align-items-center">
+      <a href="anasayfa.html">Ana Sayfa</a>
+      <a href="turistik-yerler.html" style="color:#fff;background:rgba(255,255,255,.08);">Turistik Yerler</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html">İletişim</a>
+    </div>
+
+    <a class="link" href="giris.html">Giriş</a>
+  </div>
+
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="kicker"><span class="dot"></span> Deniz • Doğa • Tarih • Şehir • Lezzet</div>
+        <h1>Turistik Yerler</h1>
+        <p class="sub">
+          Admin panelde eklenen yerler otomatik olarak burada listelenir. Uygun görseller ve “Detaylı” paneli ile keşfet.
+        </p>
+      </div>
+    </section>
+
+    <!-- FILTER BAR -->
+    <section class="glass p-3 mt-3">
+      <div class="d-flex flex-wrap gap-2 align-items-center justify-content-between">
+        <div class="d-flex flex-wrap gap-2" id="chips">
+          <span class="chip active" data-cat="Hepsi">✨ Hepsi</span>
+          <span class="chip" data-cat="Deniz">🌊 Deniz</span>
+          <span class="chip" data-cat="Doğa">🌿 Doğa</span>
+          <span class="chip" data-cat="Tarih">🏛️ Tarih</span>
+          <span class="chip" data-cat="Şehir">🌆 Şehir</span>
+          <span class="chip" data-cat="Lezzet">🍽️ Lezzet</span>
+        </div>
+
+        <div class="d-flex gap-2 flex-wrap" style="min-width: 280px;">
+          <input id="q" class="form-control control" placeholder="Ara: Kapadokya, Pamukkale, Efes..." />
+          <button class="btn btn-soft" id="clearBtn" type="button">Temizle</button>
+        </div>
+      </div>
+
+      <div class="muted mt-2" id="countText">—</div>
+      <div class="muted mt-1" id="apiStatus" style="opacity:.85;">Veriler yükleniyor…</div>
+    </section>
+
+    <!-- GRID -->
+    <section class="mt-3">
+      <div class="row g-3" id="grid"></div>
+    </section>
+
+    <footer class="text-center py-4 mt-4">
+      © <span id="yil"></span> Turizm Rehberi • Web Tasarım Projesi
+    </footer>
+  </div>
+
+  <!-- DETAIL MODAL -->
+  <div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="fw-bold" id="dTitle" style="font-size:1.15rem;">—</div>
+            <div class="muted" id="dCity">—</div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+
+        <img id="dImg" class="detail-hero" alt="detay görsel">
+
+        <div class="modal-body">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="badge badge-soft" id="dCat">—</span>
+            <span class="badge badge-soft" id="dTag">⭐ Popüler</span>
+          </div>
+
+          <p class="muted mb-3" id="dDesc" style="line-height:1.75;">—</p>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="info-box">
+                <div class="fw-bold mb-1">Öne Çıkanlar</div>
+                <ul class="m-0 ps-3 muted" id="dHighlights"></ul>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-box">
+                <div class="fw-bold mb-1">Ziyaret Önerisi</div>
+                <div class="muted" id="dTips" style="line-height:1.7;">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-between">
+          <button class="btn btn-soft" type="button" id="copyBtn">Kopyala</button>
+          <button class="btn btn-soft" type="button" data-bs-dismiss="modal">Kapat</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap (JS) ÖNCE -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.getElementById("yil").textContent = new Date().getFullYear();
+
+    const grid = document.getElementById("grid");
+    const q = document.getElementById("q");
+    const clearBtn = document.getElementById("clearBtn");
+    const countText = document.getElementById("countText");
+    const apiStatus = document.getElementById("apiStatus");
+    const chips = Array.from(document.querySelectorAll(".chip"));
+
+    let activeCat = "Hepsi";
+    let modal;
+
+    // Modal elements
+    const dTitle = document.getElementById("dTitle");
+    const dCity  = document.getElementById("dCity");
+    const dImg   = document.getElementById("dImg");
+    const dCat   = document.getElementById("dCat");
+    const dDesc  = document.getElementById("dDesc");
+    const dHighlights = document.getElementById("dHighlights");
+    const dTips  = document.getElementById("dTips");
+    const copyBtn = document.getElementById("copyBtn");
+
+    // API'den gelen veriler buraya dolacak
+    let PLACES = [];
+
+    function escapeHtml(s){
+      return String(s ?? "").replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+      }[m]));
+    }
+
+    function normalizeCat(cat){
+      const c = String(cat || "").trim();
+      // Admin farklı yazarsa da yakalamak için
+      if (/deniz/i.test(c)) return "Deniz";
+      if (/doğa|doga|nature/i.test(c)) return "Doğa";
+      if (/tarih|history/i.test(c)) return "Tarih";
+      if (/şehir|sehir|city/i.test(c)) return "Şehir";
+      if (/lezzet|yemek|food/i.test(c)) return "Lezzet";
+      return c || "Şehir";
+    }
+
+    function fallbackImageByCat(cat){
+      const c = normalizeCat(cat);
+      const map = {
+        "Deniz":  "https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=2000&q=80",
+        "Doğa":   "https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=2000&q=80",
+        "Tarih":  "https://images.unsplash.com/photo-1602247831915-9c6f54c3a3fb?auto=format&fit=crop&w=2000&q=80",
+        "Şehir":  "https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=2000&q=80",
+        "Lezzet": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=2000&q=80",
+      };
+      return map[c] || map["Şehir"];
+    }
+
+    function makeHighlights(place){
+      const c = normalizeCat(place.category);
+      const map = {
+        "Deniz":  ["Turkuaz koylar & sahil keyfi", "Gün batımı yürüyüşleri", "Tekne turu / yüzme molası"],
+        "Doğa":   ["Doğa yürüyüş rotaları", "Manzara noktaları", "Fotoğraf için ideal ışık saatleri"],
+        "Tarih":  ["Tarihî dokuyu keşfet", "Müze / ören yeri gezisi", "Rehberli turla daha anlamlı"],
+        "Şehir":  ["Şehir merkezi keşfi", "Kültürel duraklar", "Kafeler & alışveriş rotası"],
+        "Lezzet": ["Yöresel lezzet deneyimi", "Popüler restoranlar", "Çarşı & tatlı durakları"],
+      };
+      return map[c] || ["Keşif rotası", "Fotoğraf noktaları", "Yerel deneyimler"];
+    }
+
+    function makeTips(place){
+      const c = normalizeCat(place.category);
+      const map = {
+        "Deniz":  "Mayıs–Ekim arası idealdir. Sabah saatlerinde sahiller daha sakindir.",
+        "Doğa":   "Rahat ayakkabı önerilir. Sabah erken saatlerde yürüyüş ve fotoğraf daha keyifli.",
+        "Tarih":  "Geniş alanlarda su almayı unutma. Rehberli tur, detayları anlamanı kolaylaştırır.",
+        "Şehir":  "Hafta içi daha sakindir. Ulaşım için toplu taşıma / yürüyüş rotası planla.",
+        "Lezzet": "Popüler mekanlarda yoğunluk olabilir. Erken saatte gitmek iyi olur.",
+      };
+      return map[c] || "Ziyaret saatlerini ve yoğunluğu önceden kontrol et.";
+    }
+
+    function openDetail(place){
+      const cat = normalizeCat(place.category);
+      const img = place.image_url ? String(place.image_url).trim() : "";
+      const finalImg = img || fallbackImageByCat(cat);
+
+      dTitle.textContent = place.title || "—";
+      dCity.textContent  = place.city || "—";
+      dImg.src = finalImg;
+      dImg.alt = place.title || "detay";
+      dCat.textContent = cat;
+      dDesc.textContent = place.description || "—";
+
+      const highlights = makeHighlights(place);
+      dHighlights.innerHTML = highlights.map(x => `<li>${escapeHtml(x)}</li>`).join("");
+      dTips.textContent = makeTips(place);
+
+      copyBtn.onclick = () => {
+        const text = `${place.title} (${place.city}) - ${cat}`;
+        navigator.clipboard.writeText(text)
+          .then(()=> alert("Kopyalandı: " + text))
+          .catch(()=> alert("Kopyalama başarısız."));
+      };
+
+      modal.show();
+    }
+
+    function render(){
+      const query = q.value.trim().toLowerCase();
+
+      const filtered = PLACES.filter(p => {
+        const catNorm = normalizeCat(p.category);
+        const catOk = (activeCat === "Hepsi") || (catNorm === activeCat);
+        const qOk = !query || (
+          String(p.title||"").toLowerCase().includes(query) ||
+          String(p.city||"").toLowerCase().includes(query) ||
+          String(p.description||"").toLowerCase().includes(query) ||
+          catNorm.toLowerCase().includes(query)
+        );
+        return catOk && qOk;
+      });
+
+      countText.textContent = `${filtered.length} sonuç gösteriliyor`;
+
+      if(!filtered.length){
+        grid.innerHTML = `<div class="col-12"><div class="glass p-4 text-center muted">Sonuç bulunamadı. Farklı bir arama dene.</div></div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(p => {
+        const cat = normalizeCat(p.category);
+        const img = p.image_url ? String(p.image_url).trim() : "";
+        const finalImg = img || fallbackImageByCat(cat);
+
+        return `
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="cardx">
+              <img class="thumb" src="${finalImg}" alt="${escapeHtml(p.title)}">
+              <div class="p-3">
+                <div class="d-flex justify-content-between align-items-start gap-2">
+                  <div>
+                    <div class="fw-bold" style="font-size:1.05rem;">${escapeHtml(p.title)}</div>
+                    <div class="muted">${escapeHtml(p.city)}</div>
+                  </div>
+                  <span class="badge badge-soft">${escapeHtml(cat)}</span>
+                </div>
+
+                <p class="muted mt-2 mb-0" style="line-height:1.65;">
+                  ${escapeHtml(p.description)}
+                </p>
+
+                <div class="d-flex gap-2 flex-wrap mt-3">
+                  <button class="btn btn-soft" type="button" data-detail="${p.id}">
+                    Detaylı
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+
+      grid.querySelectorAll("[data-detail]").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = Number(btn.getAttribute("data-detail"));
+          const place = PLACES.find(x => Number(x.id) === id);
+          if (place) openDetail(place);
+        });
+      });
+    }
+
+    chips.forEach(ch => {
+      ch.addEventListener("click", () => {
+        chips.forEach(x => x.classList.remove("active"));
+        ch.classList.add("active");
+        activeCat = ch.dataset.cat;
+        render();
+      });
+    });
+
+    q.addEventListener("input", render);
+
+    clearBtn.addEventListener("click", () => {
+      q.value = "";
+      activeCat = "Hepsi";
+      chips.forEach(x => x.classList.remove("active"));
+      chips[0].classList.add("active");
+      render();
+    });
+
+    async function loadFromAPI(){
+      apiStatus.textContent = "Veriler yükleniyor…";
+
+      try{
+        const r = await fetch("/api/places");
+        const j = await r.json();
+
+        if(!j.ok){
+          apiStatus.textContent = "Veriler alınamadı: " + (j.error || "");
+          apiStatus.style.color = "#ffb4b4";
+          PLACES = [];
+          render();
+          return;
+        }
+
+        PLACES = (j.data || []).map(x => ({
+          id: x.id,
+          title: x.title,
+          city: x.city,
+          category: x.category,
+          description: x.description,
+          image_url: x.image_url
+        }));
+
+        apiStatus.textContent = PLACES.length
+          ? "Veriler SQLite’dan yüklendi ✅"
+          : "Henüz turistik yer eklenmemiş. Admin panelden ekleyebilirsin.";
+
+        apiStatus.style.color = "rgba(255,255,255,.75)";
+        render();
+      }catch(e){
+        apiStatus.textContent = "Sunucuya bağlanılamadı. (node sunucu.js çalışıyor mu?)";
+        apiStatus.style.color = "#ffb4b4";
+        PLACES = [];
+        render();
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      modal = new bootstrap.Modal(document.getElementById("detailModal"));
+      loadFromAPI();
+    });
+  </script>
+</body>
+</html>

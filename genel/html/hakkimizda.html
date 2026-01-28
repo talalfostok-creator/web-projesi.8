@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hakkımızda | Turizm Rehberi</title>
+
+  <!-- Fonts (site genel hissi: modern + lüks) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#060A12;
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#49D6C5;
+      --accent2:#7AA7FF;
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --r: 22px;
+    }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 420px at 15% 15%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 420px at 85% 20%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 95%, rgba(230,197,122,.10), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height:100vh;
+    }
+
+    /* NAV (site uyumlu glass) */
+    .navx{
+      max-width: 1180px;
+      margin: 14px auto 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      background: rgba(10,12,18,.55);
+      border:1px solid var(--stroke);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--text);
+      font-weight:900; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(135deg, rgba(73,214,197,.9), rgba(122,167,255,.75));
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition:.2s ease;
+      font-weight:700;
+      font-size:.95rem;
+    }
+    .navlinks a:hover{ color:#fff; background: rgba(255,255,255,.08); }
+    .navlinks a.active{
+      color:#fff;
+      background: rgba(255,255,255,.08);
+    }
+    .link{
+      color: rgba(255,255,255,.82);
+      text-decoration:none;
+      font-weight: 800;
+    }
+    .link:hover{ color:#fff; text-decoration: underline; }
+
+    .wrap{ max-width: 1180px; margin: 0 auto; padding: 18px; }
+
+    /* HERO */
+    .hero{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        linear-gradient(180deg, rgba(6,10,18,.15) 0%, rgba(6,10,18,.92) 90%),
+        url("https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=2200&q=80");
+      background-size: cover;
+      background-position:center;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      padding: 26px;
+      min-height: 320px;
+      display:flex;
+      align-items:flex-end;
+    }
+    .hero:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 280px at 20% 25%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 280px at 85% 20%, rgba(122,167,255,.16), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{ position:relative; max-width: 70ch; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.78);
+      font-weight:800;
+      font-size:.92rem;
+      width: fit-content;
+      margin-bottom: 10px;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(73,214,197,.16);
+    }
+    h1{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      letter-spacing:.3px;
+      margin:0;
+      font-size: clamp(2.1rem, 3.1vw, 2.9rem);
+      line-height:1.05;
+    }
+    .sub{
+      color: rgba(255,255,255,.78);
+      margin: 10px 0 0;
+      line-height: 1.65;
+      font-size: 1.05rem;
+    }
+
+    /* GLASS SECTIONS */
+    .glass{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow);
+    }
+    .muted{ color: var(--muted); }
+
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.82);
+      font-weight: 800;
+      font-size: .93rem;
+      white-space:nowrap;
+    }
+
+    .cardx{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      height: 100%;
+    }
+    .iconbox{
+      width:42px; height:42px; border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.25), transparent 55%),
+        linear-gradient(135deg, rgba(73,214,197,.22), rgba(122,167,255,.18));
+      display:grid; place-items:center;
+      font-size: 20px;
+      flex: 0 0 auto;
+    }
+    .img-soft{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+    }
+    .img-soft img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05) contrast(1.05);
+    }
+
+    .btn-soft{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      font-weight:800;
+      border-radius: 14px;
+      padding: 10px 14px;
+    }
+    .btn-soft:hover{ background: rgba(255,255,255,.10); }
+
+    footer{ color: rgba(255,255,255,.70); }
+
+    @media (max-width: 992px){
+      .navlinks{ display:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="navx d-flex align-items-center justify-content-between">
+    <a class="brand" href="anasayfa.html">
+      <span class="logo">⛵</span>
+      <span>Turizm Rehberi</span>
+    </a>
+
+    <div class="navlinks d-flex align-items-center">
+      <a href="anasayfa.html">Ana Sayfa</a>
+      <a href="turistik-yerler.html">Turistik Yerler</a>
+      <a class="active" href="hakkimizda.html">Hakkımızda</a>
+      <a href="iletisim.html">İletişim</a>
+    </div>
+
+    <a class="link" href="giris.html">Giriş</a>
+  </div>
+
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="kicker"><span class="dot"></span> Keşfet • Planla • Deneyimle</div>
+        <h1>Hakkımızda</h1>
+        <p class="sub">
+          Turizm Rehberi; deniz rotaları, doğa kaçamakları, kültür & tarih durakları ve lezzet keşiflerini
+          tek bir yerde, modern ve şık bir deneyimle sunar.
+        </p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="glass p-4 mt-3">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <h2 class="fw-bold mb-2" style="font-family:'Playfair Display',serif;">Neden Turizm Rehberi?</h2>
+          <p class="muted mb-3" style="line-height:1.75;">
+            Amacımız; kullanıcıların doğru, anlaşılır ve ilham veren bilgilerle seyahat planlamasını kolaylaştırmak.
+            “Nereye gitsem?” sorusuna modern bir arayüz ve güçlü turizm temasıyla cevap veriyoruz.
+          </p>
+
+          <div class="d-flex flex-wrap gap-2">
+            <span class="pill">🌊 Sahil Rotaları</span>
+            <span class="pill">📸 Fotoğraf Noktaları</span>
+            <span class="pill">🏛 Kültür & Tarih</span>
+            <span class="pill">🍽 Lezzet Durakları</span>
+          </div>
+
+          <div class="mt-4 d-flex gap-2 flex-wrap">
+            <a class="btn btn-soft" href="turistik-yerler.html">Turistik Yerleri Keşfet</a>
+            <a class="btn btn-soft" href="iletisim.html">Bize Ulaş</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="img-soft" style="height: 360px;">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80" alt="seyahat">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="mt-3">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="cardx p-3">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="iconbox">🎯</div>
+              <div>
+                <div class="fw-bold">Misyon</div>
+                <div class="muted" style="line-height:1.65;">
+                  Kullanıcıların keşif sürecini hızlandırmak ve turizm bilgisini görsel olarak güçlü bir şekilde sunmak.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="cardx p-3">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="iconbox">🌍</div>
+              <div>
+                <div class="fw-bold">Vizyon</div>
+                <div class="muted" style="line-height:1.65;">
+                  Modern arayüz, güvenilir içerik ve kullanıcı dostu deneyim ile örnek bir turizm platformu olmak.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="cardx p-3">
+            <div class="d-flex gap-3 align-items-start">
+              <div class="iconbox">✨</div>
+              <div>
+                <div class="fw-bold">Değerler</div>
+                <div class="muted" style="line-height:1.65;">
+                  Kalite, estetik, erişilebilirlik ve kullanıcı memnuniyeti. Her sayfada aynı “premium” hissi.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE STRIP -->
+    <section class="glass p-4 mt-3">
+      <div class="row g-3 align-items-center">
+        <div class="col-lg-7">
+          <h3 class="fw-bold mb-2" style="font-family:'Playfair Display',serif;">Deneyimi Basit Tutuyoruz</h3>
+          <p class="muted mb-0" style="line-height:1.75;">
+            Keşfetmek istediğin kategoriyi seç, ilham veren görsellerle yerleri incele ve “Detaylı” bölümünden
+            önerilerle planını tamamla. Admin paneli ise yönetimi güvenli ve düzenli tutar.
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <div class="d-flex gap-2 flex-wrap justify-content-lg-end">
+            <span class="pill">🔒 Güvenli Yönetim</span>
+            <span class="pill">⚡ Hızlı Gezinme</span>
+            <span class="pill">📱 Mobil Uyum</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center py-4 mt-4">
+      © <span id="yil"></span> Turizm Rehberi • Web Tasarım Projesi
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("yil").textContent = new Date().getFullYear();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

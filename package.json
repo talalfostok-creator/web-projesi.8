@@ -1,0 +1,25 @@
+{
+  "name": "turist-rehberi",
+  "version": "1.0.0",
+  "description": "Türkiye Turizm Rehberi - Web Sitesi",
+  "main": "sunucu.js",
+  "scripts": {
+    "start": "node sunucu.js",
+    "dev": "node sunucu.js"
+  },
+  "keywords": [
+    "turizm",
+    "rehber",
+    "yerler"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.22.1",
+    "express-session": "^1.19.0",
+    "multer": "^2.0.2",
+    "sqlite3": "^5.1.7"
+  }
+}

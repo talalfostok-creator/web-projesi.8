@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ana Sayfa | Turizm Rehberi</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#060A12;
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --accent:#49D6C5;
+      --accent2:#7AA7FF;
+      --gold:#E6C57A;
+      --shadow: 0 18px 55px rgba(0,0,0,.45);
+      --r: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(900px 420px at 15% 15%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 420px at 85% 20%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 95%, rgba(230,197,122,.12), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      overflow-x:hidden;
+    }
+
+    /* NAVBAR */
+    .navx{
+      position:sticky; top:14px; z-index:20;
+      max-width:1180px; margin:0 auto;
+      padding: 10px 14px;
+      border-radius:999px;
+      backdrop-filter: blur(14px);
+      background: rgba(10,12,18,.55);
+      border:1px solid var(--stroke);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--text);
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:38px; height:38px; border-radius:14px;
+      border:1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 55%),
+        linear-gradient(135deg, rgba(73,214,197,.9), rgba(122,167,255,.75));
+      display:grid; place-items:center;
+      font-weight:900;
+    }
+    .navlinks a{
+      text-decoration:none;
+      color: var(--muted);
+      padding: 10px 12px;
+      border-radius: 999px;
+      transition:.2s ease;
+      font-weight:600;
+      font-size:.95rem;
+    }
+    .navlinks a:hover{ color:#fff; background: rgba(255,255,255,.08); }
+
+    .btn-accent{
+      text-decoration:none;
+      color:#041018;
+      font-weight:900;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(73,214,197,.35);
+      background: linear-gradient(135deg, rgba(73,214,197,.95), rgba(122,167,255,.85));
+      transition:.2s ease;
+      box-shadow: 0 14px 34px rgba(0,0,0,.30);
+    }
+    .btn-accent:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+
+    .btn-ghost{
+      text-decoration:none;
+      color: var(--muted);
+      font-weight:800;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.04);
+      transition:.2s ease;
+    }
+    .btn-ghost:hover{ color:#fff; background: rgba(255,255,255,.07); }
+
+    .wrap{ max-width:1180px; margin: 0 auto; padding: 18px 18px 70px; }
+
+    /* HERO */
+    .hero{
+      margin-top: 18px;
+      border-radius: var(--r);
+      overflow:hidden;
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      position:relative;
+      min-height: 430px;
+      background:
+        linear-gradient(180deg, rgba(6,10,18,.10) 0%, rgba(6,10,18,.92) 85%),
+        url("https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 260px at 20% 30%, rgba(73,214,197,.18), transparent 55%),
+        radial-gradient(900px 260px at 85% 30%, rgba(122,167,255,.16), transparent 60%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:absolute; inset:0;
+      padding: 22px;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      gap: 14px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.78);
+      font-weight:700;
+      font-size:.92rem;
+      width: fit-content;
+    }
+    .dot{
+      width:9px; height:9px; border-radius:99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(73,214,197,.16);
+    }
+    h1{
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      letter-spacing: .3px;
+      font-size: clamp(2.1rem, 3.6vw, 3.1rem);
+      line-height: 1.05;
+      margin: 0;
+    }
+    .sub{
+      color: rgba(255,255,255,.74);
+      margin:0;
+      max-width: 78ch;
+      line-height: 1.65;
+      font-size: 1.02rem;
+    }
+    .hero-actions{
+      display:flex; gap: 10px; flex-wrap:wrap; align-items:center;
+    }
+
+    /* CHIPS */
+    .chip-row{
+      display:flex; flex-wrap:wrap; gap: 10px;
+      margin-top: 6px;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.78);
+      font-weight: 800;
+      font-size: .95rem;
+      user-select:none;
+    }
+    .chip-btn{
+      cursor:pointer;
+      outline:none;
+      appearance:none;
+    }
+    .chip-btn:hover{
+      background: rgba(255,255,255,.08);
+      color:#fff;
+    }
+    .chip-btn:active{
+      transform: translateY(1px);
+    }
+
+    /* SECTION */
+    .panel{
+      margin-top: 14px;
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 12px 28px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .panel-head{
+      padding: 16px 16px 10px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      align-items:flex-end;
+      flex-wrap:wrap;
+    }
+    .panel-head b{ font-size: 1.05rem; letter-spacing:.2px; }
+    .panel-head span{ color: var(--muted); font-size: .92rem; }
+    .panel-body{ padding: 16px; }
+
+    /* Featured cards */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .cardx{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(10,12,18,.45);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.22);
+      overflow:hidden;
+      transition:.25s ease;
+      min-height: 220px;
+    }
+    .cardx:hover{ transform: translateY(-2px); background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+    .thumb{
+      height: 130px;
+      background-size: cover;
+      background-position: center;
+      position:relative;
+      filter:saturate(1.05);
+    }
+    .thumb:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.72));
+    }
+    .cardx .body{ padding: 12px 14px 14px; }
+    .cardx h3{ margin:0 0 4px; font-size: 1.05rem; font-weight: 950; }
+    .cardx p{ margin:0; color: var(--muted); font-size:.93rem; line-height:1.55; }
+
+    /* Footer */
+    .footer{
+      margin-top: 16px;
+      border-radius: var(--r);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding: 16px 18px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 10px;
+      flex-wrap:wrap;
+      color: var(--muted);
+    }
+    .footer a{ color: rgba(255,255,255,.75); text-decoration:none; font-weight:800; }
+    .footer a:hover{ color:#fff; }
+
+    @media (max-width: 992px){
+      .navlinks{ display:none !important; }
+      .cards{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <div class="navx d-flex align-items-center justify-content-between">
+    <a class="brand" href="/html/anasayfa.html">
+      <span class="logo">⛵</span>
+      <span>Turizm Rehberi</span>
+    </a>
+
+    <div class="navlinks d-flex align-items-center">
+      <a href="/html/anasayfa.html" style="color:#fff;background:rgba(255,255,255,.08);">Ana Sayfa</a>
+      <a href="/html/turistik-yerler.html">Turistik Yerler</a>
+      <a href="/html/hakkimizda.html">Hakkımızda</a>
+      <a href="/html/iletisim.html">İletişim</a>
+    </div>
+
+    <div class="d-flex gap-2 align-items-center">
+      <a class="btn-ghost" href="/html/hakkimizda.html">Hakkımızda</a>
+      <a class="btn-accent" href="/html/iletisim.html">İletişim →</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="kicker"><span class="dot"></span> Deniz • Rotalar • Kültür • Lezzet</div>
+        <h1>Yeni Rotanı Keşfet</h1>
+        <p class="sub">
+          Sahil yürüyüşleri, fotoğraf noktaları, kültürel duraklar ve yöresel lezzetlerle
+          modern ve şık bir turizm deneyimi yaşa.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn-ghost" href="/html/turistik-yerler.html">Turistik Yerler</a>
+          <a class="btn-accent" href="/html/iletisim.html">İletişim</a>
+        </div>
+
+        <!-- 4 MODAL -->
+        <div class="chip-row">
+          <button class="chip chip-btn" data-bs-toggle="modal" data-bs-target="#modalSahil">🌊 Sahil Rotaları</button>
+          <button class="chip chip-btn" data-bs-toggle="modal" data-bs-target="#modalFoto">📸 Fotoğraf Noktaları</button>
+          <button class="chip chip-btn" data-bs-toggle="modal" data-bs-target="#modalKultur">🏛️ Kültür & Tarih</button>
+          <button class="chip chip-btn" data-bs-toggle="modal" data-bs-target="#modalLezzet">🍽️ Lezzet Durakları</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured -->
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <b>Öne Çıkan Deneyimler</b>
+          <span>Turizm temasına uygun seçilmiş öneriler</span>
+        </div>
+        <div class="d-flex gap-2 flex-wrap">
+          <span style="padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);font-weight:800;color:rgba(255,255,255,.78);">✨ Modern Tasarım</span>
+          <span style="padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);font-weight:800;color:rgba(255,255,255,.78);">🧭 Kolay Gezinme</span>
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <div class="cards">
+          <div class="cardx">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="body">
+              <h3>Deniz Esintisi</h3>
+              <p>Sahil boyunca yürüyüş + gün batımı noktaları + kısa mola planı.</p>
+            </div>
+          </div>
+
+          <div class="cardx">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="body">
+              <h3>Şehir & Kültür</h3>
+              <p>Tarihi sokaklar, müzeler ve ikonik meydanlarda mini rota.</p>
+            </div>
+          </div>
+
+          <div class="cardx">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1600&q=80');"></div>
+            <div class="body">
+              <h3>Lezzet Yolculuğu</h3>
+              <p>Yöresel tatlar + sokak lezzetleri + tatlı & kahve molası.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div>© <span id="yil"></span> Turizm Rehberi • Web Tasarım Projesi</div>
+      <div class="d-flex gap-3">
+        <a href="/html/turistik-yerler.html">Turistik Yerler</a>
+        <a href="/html/hakkimizda.html">Hakkımızda</a>
+        <a href="/html/iletisim.html">İletişim</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("yil").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- ===================== MODALS ===================== -->
+
+  <!-- SAHİL -->
+  <div class="modal fade" id="modalSahil" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style="background: rgba(10,12,18,.92); border:1px solid rgba(255,255,255,.14); border-radius:22px;">
+        <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,.12);">
+          <h5 class="modal-title" style="font-weight:900;">🌊 Sahil Rotaları</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="color: rgba(255,255,255,.82);">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Sahil" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Deniz" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px; display:grid; gap:10px;">
+            <div style="padding:12px; border-radius:18px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);">
+              <b>Gün Batımı Sahil Yürüyüşü</b>
+              <div style="opacity:.85; margin-top:4px;">45–60 dk yürüyüş + manzara molası. En iyi saat: 16:30–18:30.</div>
+            </div>
+            <div style="padding:12px; border-radius:18px; border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);">
+              <b>Tekne Turu & Koy Keşfi</b>
+              <div style="opacity:.85; margin-top:4px;">Sakin koylarda yüzme ve fotoğraf. Su, şapka ve güneş kremi al.</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; opacity:.78;">💡 İpucu: Rüzgârlık ve hafif ayakkabı kullan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOTO -->
+  <div class="modal fade" id="modalFoto" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style="background: rgba(10,12,18,.92); border:1px solid rgba(255,255,255,.14); border-radius:22px;">
+        <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,.12);">
+          <h5 class="modal-title" style="font-weight:900;">📸 Fotoğraf Noktaları</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="color: rgba(255,255,255,.82);">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Şehir" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Manzara" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px; display:grid; gap:10px;">
+            <div style="padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);">
+              <b>Tarihi Sokaklar</b>
+              <div style="opacity:.85; margin-top:4px;">Sabah erken saatler daha boş olur, ışık daha yumuşaktır.</div>
+            </div>
+            <div style="padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);">
+              <b>Seyir Terasları</b>
+              <div style="opacity:.85; margin-top:4px;">Geniş açı ile şehir + deniz çizgisi harika görünür.</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; opacity:.78;">💡 İpucu: Golden hour (gün batımı) yakala.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KÜLTÜR -->
+  <div class="modal fade" id="modalKultur" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style="background: rgba(10,12,18,.92); border:1px solid rgba(255,255,255,.14); border-radius:22px;">
+        <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,.12);">
+          <h5 class="modal-title" style="font-weight:900;">🏛️ Kültür & Tarih</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="color: rgba(255,255,255,.82);">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Tarih" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1527838832700-5059252407fa?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Müze" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1582550945154-66ea8fff25e1?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px; display:grid; gap:10px;">
+            <div style="padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);">
+              <b>Tarihi Yapılar</b>
+              <div style="opacity:.85; margin-top:4px;">Kuleler, saraylar, camiler ve meydanlar turizmin kalbidir.</div>
+            </div>
+            <div style="padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);">
+              <b>Müzeler & Sergiler</b>
+              <div style="opacity:.85; margin-top:4px;">Yerel tarihe hızlı giriş için idealdir. Rehberli tur varsa al.</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; opacity:.78;">💡 İpucu: “Tarihi yer + müze + çarşı” aynı gün için çok iyi plan olur.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEZZET -->
+  <div class="modal fade" id="modalLezzet" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style="background: rgba(10,12,18,.92); border:1px solid rgba(255,255,255,.14); border-radius:22px;">
+        <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,.12);">
+          <h5 class="modal-title" style="font-weight:900;">🍽️ Lezzet Durakları</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" style="color: rgba(255,255,255,.82);">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Yemek" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12);">
+                <img alt="Kafe" style="width:100%; height:180px; object-fit:cover;"
+                     src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1400&q=80">
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:14px; display:grid; gap:10px;">
+            <div style="padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);">
+              <b>Yöresel Kahvaltı</b>
+              <div style="opacity:.85; margin-top:4px;">Serpme kahvaltı turistik bölgelerde çok popüler.</div>
+            </div>
+            <div style="padding:12px;border-radius:18px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);">
+              <b>Tatlı & Kahve Molası</b>
+              <div style="opacity:.85; margin-top:4px;">Baklava/künefe + Türk kahvesi ile günü tatlı bitir.</div>
+            </div>
+          </div>
+          <div style="margin-top:12px; opacity:.78;">💡 İpucu: Yerel ve yoğun mekanlar genelde daha iyidir.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (MODAL ÇALIŞMASI İÇİN ŞART) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
